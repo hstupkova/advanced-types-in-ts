@@ -1,6 +1,6 @@
 type Admin = {
   name: string;
-  privileges: string [];
+  privileges: string[];
 };
 
 type Employee = {
@@ -13,9 +13,8 @@ type ElevatedEmployee = Admin & Employee;
 const e1: ElevatedEmployee = {
   name: 'Max',
   privileges: ['create-server'],
-  startDate: new Date()
+  startDate: new Date(),
 };
-
 
 // with interfaces:
 
@@ -43,7 +42,8 @@ type Numeric = number | boolean;
 type Universal = Combinable & Numeric;
 
 function add(a: Combinable, b: Combinable) {
-  if (typeof a === 'string' || typeof b === 'string') { // = type guard
+  if (typeof a === 'string' || typeof b === 'string') {
+    // = type guard
     return a.toString() + b.toString();
   }
   return a + b;
@@ -62,7 +62,7 @@ function printEmployeeInformation(emp: UnknownEmployee) {
 }
 
 printEmployeeInformation(e1);
-printEmployeeInformation({name: 'Manu', startDate: new Date()});
+printEmployeeInformation({ name: 'Manu', startDate: new Date() });
 
 class Car {
   drive() {
@@ -95,3 +95,31 @@ function useVehicle(vehicle: Vehicle) {
 
 useVehicle(v1);
 useVehicle(v2);
+
+interface Bird {
+  type: 'bird';
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: 'horse';
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;
+      break;
+  }
+
+  console.log('Moving at speed: ' + speed);
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 10});
